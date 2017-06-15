@@ -46,3 +46,40 @@ Dumping objects ->
  log中3558059的地方存在内存泄漏，然后将_CrtSetBreakAlloc(3558059)注释取消，
  然后重新编译执行程序，代码会run到内存泄漏的地方就停下来
 ```
+
+### 例子
+```
+#define _CRTDBG_MAP_ALLOC
+#include "stdlib.h"
+#include "crtdbg.h"
+ 
+#include <iostream>
+using namespace std;
+
+int* getInt() {
+	int* p = (int*)malloc(sizeof(int));
+	*p = 100;
+	return p;
+}
+ 
+char* GetMemory(char *p, int num)
+{
+    p = (char*)malloc(sizeof(char) * num);
+	return p;
+}
+ 
+int main(int argc,char** argv)
+{
+    char *str = NULL;
+    char *p = GetMemory(str, 100);
+	free(p);
+    cout<<"Memory leak test!"<<endl;
+
+	int* pInt = getInt();
+	cout << *pInt << endl;
+	free(pInt);
+
+    _CrtDumpMemoryLeaks();
+    return 0;
+}
+```
