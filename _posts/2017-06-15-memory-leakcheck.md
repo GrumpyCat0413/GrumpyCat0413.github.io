@@ -2,7 +2,7 @@
 layout: post
 title: VS2013 内存泄漏检查
 ---
-
+http://baitai.iteye.com/blog/1020355
 ```
 #define _CRTDBG_MAP_ALLOC
 
