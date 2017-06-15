@@ -4,6 +4,9 @@ title: VS2013 内存泄漏检查
 ---
 
 ```
+#define _CRTDBG_MAP_ALLOC
+
+#include <stdlib.h>
 #include <crtdgb.h>
 
 
@@ -13,7 +16,9 @@ void EnableMemleakCheck()
   tmpFlag |= _CRTDBG_LEAK_CHECK_DF;
   _CrtSetDbgFlag(tmpFlag);
 }
-
+//或者
+//_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);     
+// 设置CRT库中的内存泄露检测标记 
 int main()
 {
   EnableMemLeakCheck();
